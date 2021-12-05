@@ -65,7 +65,6 @@ public class HydrothermalVenture {
             Line line = lineList.get(i);
             System.out.println(line.getStartPoint());
             Point[] points = line.getPoints();
-            // System.out.println("# points: " + points.length);
             for (Point p : points) {
                 map[p.x * mapDim + p.y]++;
             }

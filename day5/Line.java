@@ -54,16 +54,5 @@ public class Line {
                 System.out.println("p is null here");
                 break;}
         return pList;
-
-        // for (int i = 0, index = 0; i < maxX-minX + 1; i++) {
-        //     if (startPoint.x == minX) {
-        //         for (int j = 0; j < maxY - minY + 1; j++, i++, index++)
-        //             pList[index] = new Point(i+minX, j+minY);
-        //     } else {
-        //         for (int j = 0; j < maxY - minY + 1; j++, i++, index++)
-        //             pList[index] = new Point(i+minX, maxY-j);
-        //     }
-        // }
-        // return pList;
     }
 }
