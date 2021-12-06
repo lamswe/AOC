@@ -12,8 +12,6 @@ public class day6 {
         System.out.println("Day 6 - ");
         readInput();
         // part1(100);
-        // printList();
-        // System.out.println(fishList.size());
         part2(256);
     }
 
@@ -65,11 +63,6 @@ public class day6 {
             nrFishes[i-1] = new BigInteger(""+ totalFish(dayCount, i));
             System.out.println(nrFishes[i-1]);
         }
-        // nrFishes[0] = new BigInteger("1911853737");
-        // nrFishes[1] = new BigInteger("1322121852");
-        // nrFishes[2] = new BigInteger("922255946");
-        // nrFishes[3] = new BigInteger("431133578");
-        // nrFishes[4] = new BigInteger("73264713");
 
         for(int i = 0; i < fishList.size(); i++) {
             int fish = fishList.get(i);
