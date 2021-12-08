@@ -5,10 +5,12 @@ import java.io.IOException;
 public class SevenSegmentSearch {
     static String input = "";
     static String output = "";
+    static int sum = 0;
     public static void main(String[] args) {
         System.out.println("Day 7 - Seven Segment Search");
         readInput();
         // part1();
+        part2();
     }
     
     public static void readInput() {
@@ -17,7 +19,7 @@ public class SevenSegmentSearch {
                     String[] data = br.readLine().split(" \\| ");
                     input += data[0] +" ";
                     output += data[1] + " ";
-                    decode(input, output);     
+                    sum += decode(data[0], data[1]);     
                 }
             } catch (Exception e) {
                 // TODO Auto-generated catch block
@@ -26,35 +28,12 @@ public class SevenSegmentSearch {
             
     }
 
-    /*
-    abcdefg
-    num - len (0,6) (1,2) (2,5) (3,5) (4,4) (5,5) (6,6) (7,3) (8,7) (9,6)
-    1 - 7 => a
-    1 - 4 => bd
-    1 - 8 => abdeg
-    4 - 7 => abd
-    4 - 8 => aeg
-    7 - 8 => bdeg
-    ------------------------
-    we have a, bd
 
-    a = 8
-    b = 6
-    c = 8
-    d = 7
-    e = 4
-    f = 9
-    g = 7
-
-    b e f
-    
-    */
     private static int decode (String input, String output) {
         String standard = "abcdefg";
         String data0 = input.replace(" ", "");
         int[] count = new int[7];
         char[] decoded = new char[7];
-        char[] mixed = new char[7];
         for (int i = 0; i < data0.length(); i++) {
             switch (data0.charAt(i)){
                 case 'a': count[0]++; break;
@@ -98,11 +77,34 @@ public class SevenSegmentSearch {
             }
         }
 
-        // for (int i = 0; i < 7; i++) {
-        //     System.out.println(decoded[i]);
-        // }   
-        
-        return 0;
+        String[] data2 = output.split(" ");
+        String num = "";
+        for (String str : data2) {
+            String bits = "";
+            for (char c : decoded) {
+                if (str.contains("" + c))
+                    bits += "1";
+                else
+                    bits += 0;
+            }
+            switch (bits) {
+                case "1110111": num += 0; break;
+                case "0010010": num += 1; break;
+                case "1011101": num += 2; break;
+                case "1011011": num += 3; break;
+                case "0111010": num += 4; break;
+                case "1101011": num += 5; break;
+                case "1101111": num += 6; break;
+                case "1010010": num += 7; break;
+                case "1111111": num += 8; break;
+                case "1111011": num += 9; break;
+                default: num = "-1"; break;
+            }
+
+
+        }
+        System.out.println(num);
+        return Integer.parseInt(num);
     }
     
 
@@ -115,21 +117,12 @@ public class SevenSegmentSearch {
             if (len == 2 || len == 4 || len == 3 || len == 7)
                 count ++;
         }
-        System.out.println(count);
+        // System.out.println(count);
     }
 
 
     public static void part2() {
-        String[] data = input.split(" ");
-        for (int i = 0; i < data.length; i++) {
-            
-        }
-        int[] count = new int[7];
-        char[] decoded = new char[7];
-        char[] mixed = new char[7];
-
-        
+        System.out.println("Sum: " + sum);
     }
-
 
 }
