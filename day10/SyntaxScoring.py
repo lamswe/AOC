@@ -3,8 +3,10 @@ from os import closerange
 
 
 parenScores ={')':3, ']':57, '}':1197, '>':25137, 'noError':0}
-matchedParen = {'(':')', '{':'}', '[':']', '<':'>'}
+matchedParen = {'(':')', '[':']', '{':'}', '<':'>'}
 fixScores = {'(':1, '{':3, '[':2, '<':4}
+openParen = ['(', '[', '{', '<']
+
 def readInput():
     lines = open("input.txt", "r").readlines()
     return lines
@@ -14,8 +16,7 @@ def part1(lines):
     scores = []
     for line in lines:
         line = line.strip()
-        #print (seekError(line)[0], " - ", seekError(line)[1])
-        _, error, _ = seekError(line)
+        error, _ = seekError(line)
         scores.append(parenScores[error])
         print (scores)
     sum = 0
@@ -24,23 +25,22 @@ def part1(lines):
     print ("Part 1: sum =", sum)
     
 def part2(lines):
-    fixScore = []
+    scores = []
     for line in lines:
         line = line.strip()
         lineScore = 0
-        _, error, paren = seekError(line)
+        error, paren = seekError(line)
         if error == 'noError':
             paren.reverse()
             for p in paren:
                 lineScore = lineScore* 5 + fixScores[p]
-        fixScore.append(lineScore) if lineScore != 0 else None
-    fixScore.sort()
-    result = fixScore[round(len(fixScore)/2)]
+        scores.append(lineScore) if lineScore != 0 else None
+    scores.sort()
+    result = scores[round(len(scores)/2)]
     print ("Part 2: ", result)
     return
 
 def seekError (line):
-    openParen = ['(', '[', '{', '<']
     paren = []
     for i in range(len(line)):
         if line[i] in openParen:
@@ -49,8 +49,8 @@ def seekError (line):
             paren.pop()
         else:
             #print ("return", i, line[i], paren)
-            return i, line[i], paren
-    return 0, 'noError', paren
+            return line[i], paren
+    return 'noError', paren
 
 def main():
     print("Day10 - Syntax Scoring")
